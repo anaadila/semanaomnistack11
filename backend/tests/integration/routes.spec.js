@@ -8,8 +8,6 @@ describe ('ONG', () => {
         await connection.migrate.latest();
     });
 
-
-
     it('should be able to create a new ONG', async () => {
         const response = await request(app)
         .post('/ongs')
@@ -219,7 +217,6 @@ describe ('Login', () => {
             id: responseId.body.id
         });
 
-        console.log(response.body);
 
         expect(response.status).toBe(200);
         expect(response.body).toMatchObject({name: "ONG"});
