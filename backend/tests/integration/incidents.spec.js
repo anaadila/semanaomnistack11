@@ -29,7 +29,7 @@ describe ('Incidents', () => {
 
         const newOngID = await request(app).post('/ongs').send(newOng)
 
-        const response = await request(app).post('/incidents').set("Authorization", newOngID).send(newIncident)
+        const response = await request(app).post('/incidents').set("Authorization", newOngID.body.id).send(newIncident)
         
         expect(response.status).toBe(200)
         expect(response.body).toHaveProperty('id')
@@ -57,10 +57,10 @@ describe ('Incidents', () => {
         }
 
         const newOngID = await request(app).post('/ongs').send(newOng)
-        const newIncidentID = await request(app).post('/incidents').set("Authorization", newOngID).send(newIncident)
-        const newIncidentID2 = await request(app).post('/incidents').set("Authorization", newOngID).send(newIncident2)
+        const newIncidentID = await request(app).post('/incidents').set("Authorization", newOngID.body.id).send(newIncident)
+        const newIncidentID2 = await request(app).post('/incidents').set("Authorization", newOngID.body.id).send(newIncident2)
         
-        const responseDel = await request(app).set("Authorization", newOngID.body.id).delete(`/incidents/${newIncidentID.body.id}`)
+        const responseDel = await request(app).delete(`/incidents/${newIncidentID.body.id}`).set("Authorization", newOngID.body.id)
 
         expect(newOngID.status).toBe(200)
         expect(newIncidentID.status).toBe(200)
