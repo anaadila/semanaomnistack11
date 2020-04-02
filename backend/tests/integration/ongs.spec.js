@@ -24,7 +24,7 @@ describe ('ONG', () => {
             uf: "CE"
         })
 
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(200);  
         expect(response.body).toHaveProperty('id');
         expect(response.body.id).toHaveLength(8);
     })
